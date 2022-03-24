@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,5 +28,8 @@ Route::group([
     ], function () {
 
         Route::get('logout', [AuthController::class, 'logout']);
+        Route::apiResources([
+            'books' => BookController::class,
+        ]);
     });
 });
