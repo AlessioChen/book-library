@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +32,7 @@ Route::group([
         Route::apiResources([
             'books' => BookController::class,
         ]);
+
+        Route::get('users/{user}/library', [UserController::class, 'library']);
     });
 });
