@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AuthLogoutRequest;
+use App\Http\Requests\Auth\AuthLogoutRequest;
 use App\Http\Requests\Auth\AuthLoginRequest;
+use App\Http\Requests\Auth\AuthRegisterRequest;
 use App\Http\Resources\AuthLoginResource;
+use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller {
 
-    public function login(AuthLoginRequest $request)
-    {
+    public function login(AuthLoginRequest $request) {
 
         $user = User::whereEmail($request->validated('email'))->firstOrFail();
 
@@ -33,13 +34,24 @@ class AuthController extends Controller
         return new AuthLoginResource($user);
     }
 
-    public function logout(AuthLogoutRequest $request)
-    {
+    public function logout(AuthLogoutRequest $request) {
 
         Auth::user()->currentAccessToken()->delete();
 
         return response()->json([
             'message' => "user logged out!",
         ], 204);
+    }
+
+    public function register(AuthRegisterRequest $request) {
+
+        $user =  User::create([
+            'name' => $request->validated('name'),
+            'email' => $request->validated('email'),
+            'password' => Hash::make($request->validated('password'))
+
+        ]);
+
+        return new UserResource($user);
     }
 }

@@ -19,6 +19,7 @@ Route::group([
 ], function () {
 
     Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
 
     //autentificated routes
     Route::group([
@@ -26,6 +27,5 @@ Route::group([
     ], function () {
 
         Route::get('logout', [AuthController::class, 'logout']);
-
     });
 });
