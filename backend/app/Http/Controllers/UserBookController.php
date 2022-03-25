@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserBook\UserBookDestroyRequest;
 use App\Http\Requests\UserBook\UserBookIndexRequest;
 use App\Http\Requests\UserBook\UserBookStoreRequest;
+use App\Http\Requests\UserBook\UserBookUpdatetRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Models\User;
@@ -19,8 +20,15 @@ class UserBookController extends Controller {
         return  BookResource::collection($books);
     }
 
-    public function update(){
-        
+    public function update(UserBookUpdatetRequest $request, User $user, Book $book) {
+
+        $user->library()->syncWithoutDetaching([
+            $request->validated('book_id') => [
+                'completed_readings' => $request->validated('completed_readings')
+            ],
+        ]);
+
+        return response()->json(["message" => 'Book updated!']);
     }
 
     public function store(UserBookStoreRequest $request, User $user) {
