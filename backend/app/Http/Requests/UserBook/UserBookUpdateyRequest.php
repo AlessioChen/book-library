@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\UserBook;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class UserLibraryBooksRequest extends FormRequest {
+class UserBookUpdateyRequest extends FormRequest {
 
     public function authorize() {
-        return Auth::check();
+        return false;
     }
-
 
     public function rules() {
         return [

@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserBookController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,11 +31,8 @@ Route::group([
         Route::get('logout', [AuthController::class, 'logout']);
         Route::apiResources([
             'books' => BookController::class,
+            'users.books'=> UserBookController::class
         ]);
 
-        Route::get('users/{user}/libraryBooks', [UserController::class, 'libraryBooks']);
-        Route::get('users/{user}/booskNotInLibrary', [UserController::class, 'booskNotInLibrary']);
-        Route::post('users/{user}/addBook', [UserController::class, 'addBookToLibrary']);
-        Route::delete('users/{user}/{book}', [UserController::class, 'deleteBookFromLibrary']);
     });
 });

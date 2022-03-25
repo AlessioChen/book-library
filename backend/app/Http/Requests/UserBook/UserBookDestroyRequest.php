@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\UserBook;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UserBooksNotInLibrarysRequest extends FormRequest {
+class UserBookDestroyRequest extends FormRequest {
 
     public function authorize() {
         return Auth::check();
