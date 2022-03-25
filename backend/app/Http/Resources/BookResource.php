@@ -13,10 +13,10 @@ class BookResource extends JsonResource {
             'author'  => $this->author,
             'isbn_code' => $this->isbn_code,
             'plot' => $this->plot,
-            'add_date' => $this->whenPivotLoaded('user_books', function () {
+            'add_date' => $this->whenPivotLoaded('user_book', function () {
                 return $this->pivot->add_date;
             }),
-            'completed_readings' => $this->whenPivotLoaded('user_books', function () {
+            'completed_readings' => $this->whenPivotLoaded('user_book', function () {
                 return $this->pivot->completed_readings;
             })
 

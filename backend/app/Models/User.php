@@ -27,10 +27,10 @@ class User extends Authenticatable {
 
     public function library(): BelongsToMany {
 
-        return $this->belongsToMany(Book::class, 'user_books')
+        return $this->belongsToMany(Book::class, 'user_book')
             ->withPivot([
                 'add_date',
                 'completed_readings'
-            ]);
+            ])->orderByPivot('add_date');
     }
 }
