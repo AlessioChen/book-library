@@ -36,5 +36,6 @@ Route::group([
         Route::get('users/{user}/libraryBooks', [UserController::class, 'libraryBooks']);
         Route::get('users/{user}/booskNotInLibrary', [UserController::class, 'booskNotInLibrary']);
         Route::post('users/{user}/addBook', [UserController::class, 'addBookToLibrary']);
+        Route::delete('users/{user}/{book}', [UserController::class, 'deleteBookFromLibrary']);
     });
 });

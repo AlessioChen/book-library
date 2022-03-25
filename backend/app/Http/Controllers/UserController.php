@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\User\UserAddBookToLibraryRequest;
 use App\Http\Requests\User\UserBooksNotInLibrarysRequest;
+use App\Http\Requests\User\UserDeleteBookFromLibrary;
 use App\Http\Requests\User\UserLibraryBooksRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
@@ -39,6 +40,17 @@ class UserController extends Controller {
             'completed_readings' => $request->validated('completed_readings'),
         ]);
 
-        return response()->json('Book added to your library!');
+        return response()->json(["message" => 'Book added to your library!']);
+    }
+
+    public function deleteBookFromLibrary(UserDeleteBookFromLibrary $request, User $user, Book $book) {
+
+        if (!$user->library()->where('book_id', $book->id)->exists()) {
+            return response()->json(["error" => 'Book Not present in library'], 404);
+        }
+
+        $user->library()->detach($book);
+
+        return response()->json(["message" => "Book delete from library"]);
     }
 }
