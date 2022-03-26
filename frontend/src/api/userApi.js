@@ -9,5 +9,13 @@ export default {
 
   login(creds) {
     return http.post(db_url + '/login', creds)
+  },
+  
+  logout() {
+    return http.get(db_url + '/logout', {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    });
   }
 }

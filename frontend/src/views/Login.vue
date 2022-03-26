@@ -51,13 +51,14 @@ const store = useStore();
 const router = useRouter();
 
 const login = () => {
-  store.dispatch("auth/login", {
-    email: email.value,
-    password: password.value,
-  });
-  // .then(() => {
-  //   router.push("/");
-  // });
+  store
+    .dispatch("auth/login", {
+      email: email.value,
+      password: password.value,
+    })
+    .then(() => {
+      router.push({ name: "Home" });
+    });
 };
 </script>
 

@@ -1,5 +1,6 @@
 import userApi from '../../api/userApi';
 
+
 const LOGIN = "LOGIN";
 const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGOUT = "LOGOUT";
@@ -27,19 +28,40 @@ const actions = {
 
   login: ({ commit }, creds) => {
 
-    userApi.login(creds)
-      .then(({ data }) => {
-        let access_token = data.data.access_token;
-        let user = data.data.user;
+    commit(LOGIN);
 
-        localStorage.setItem('access_token', access_token);
-        commit("LOGIN_SUCCESS", { token: access_token, user: user });
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        userApi.login(creds)
+          .then(({ data }) => {
+            let access_token = data.data.access_token;
+            let user = data.data.user;
+            localStorage.setItem('token', access_token);
+            commit("LOGIN_SUCCESS", { token: access_token, user: user });
 
-      })
-      .catch(e => {
-        commit("AUTH_ERROR");
-        localStorage.removeItem('access_token');
-      });
+            resolve();
+          })
+          .catch(err => {
+            commit("AUTH_ERROR");
+            localStorage.removeItem("token");
+            reject();
+
+          })
+      }, 100);
+    });
+
+  },
+
+  logout: ({ commit }) => {
+
+    return new Promise((resolve, reject) => {
+      userApi.logout()
+        .then((response) => {
+          commit(LOGOUT);
+          localStorage.removeItem("token");
+          resolve();
+        })
+    });
 
   },
 
@@ -55,8 +77,18 @@ const mutations = {
   [LOGIN_SUCCESS](state, data) {
     state.status = "success"
     state.token = data.token;
-    state.user = data.use;
+    state.user = data.user;
 
+  },
+  [AUTH_ERROR](state) {
+    state.status = "error";
+    state.token = "";
+    state.user = null;
+  },
+  [LOGOUT](state) {
+    state.status = "";
+    state.token = "";
+    state.user = null;
   }
 };
 
