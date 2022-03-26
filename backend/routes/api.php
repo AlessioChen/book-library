@@ -31,8 +31,7 @@ Route::group([
         Route::get('logout', [AuthController::class, 'logout']);
         Route::apiResources([
             'books' => BookController::class,
-            'users.books'=> UserBookController::class
+            'users.books' => UserBookController::class
         ]);
-
     });
 });
