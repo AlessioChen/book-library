@@ -1,8 +1,8 @@
-import { createApp } from 'vue';
+import { createApp, VueElement } from 'vue';
 import store from './store';
-
 import App from './App.vue';
 import router from './router';
+import axios from 'axios';
 import './assets/tailwind.css';
 
 

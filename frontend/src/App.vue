@@ -1,28 +1,10 @@
 <template>
-  <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
+
+  <div class="bg-white py-8">
+
+    <div class="min-h-full container mx-auto flex justify-center items-center flex-wrap pt-4 pb-12 sm:px-6 lg:px-8 ">
+      <router-view />
+    </div>
+  </div>
+
 </template>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
