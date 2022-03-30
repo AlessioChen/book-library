@@ -4,6 +4,10 @@
     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
         <div class="overflow-hidden">
+
+          <router-link :to="{name: 'books'} " class="text-blue-600 hover:text-blue-900 mb-2 mr-2">
+            Add new book to library
+          </router-link>
           <table class="min-w-full">
             <thead class="border-b">
               <tr>
@@ -16,10 +20,12 @@
                 <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                   isbn_code
                 </th>
+                  <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                  completed_readings
+                </th>
                 <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                   actions
                 </th>
-
               </tr>
             </thead>
             <tbody>
@@ -34,12 +40,14 @@
                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                   {{book.isbn_code}}
                 </td>
+                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                  {{book.completed_readings}}
+                </td>
 
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <button @click="handleViewButtonClick(book)" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">
                     View book
                   </button>
-
                 </td>
               </tr>
 
@@ -54,8 +62,10 @@
 <script setup>
 import { useStore } from "vuex";
 import { computed } from "@vue/reactivity";
+import { useRouter } from "vue-router";
 
 const store = useStore();
+const router = useRouter();
 const books = computed(() => store.getters["userBooks/getUserBooks"]);
 
 store.dispatch("userBooks/getAllUserBooks");

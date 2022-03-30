@@ -26,5 +26,36 @@ export default {
       }
     });
 
+  },
+
+  deleteUserBook(book_id) {
+    return http.delete(db_url + `/users/${localStorage.getItem('user_id')}/books/${book_id}`, {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    })
+  },
+
+  booksNotInLibrary() {
+    return http.get(db_url + `/users/${localStorage.getItem('user_id')}/books/notIn`, {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    });
+  },
+  addBookToLibrary(data) {
+
+    return http.post(db_url + `/users/${localStorage.getItem('user_id')}/books`, {
+      book_id: data.book_id,
+      completed_readings: data.completed_readings
+    }, {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    });
+
+
   }
+
+
 }

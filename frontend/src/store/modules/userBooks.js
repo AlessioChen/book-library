@@ -1,4 +1,3 @@
-import axios from 'axios';
 import userApi from '../../api/userApi';
 
 
@@ -19,15 +18,14 @@ const getters = {
 
   getShowBook(state) {
     return state.showBook;
-  }, 
-  getBook(state){
-    return  state.book;
+  },
+  getBook(state) {
+    return state.book;
   }
 
 }
 const actions = {
   getAllUserBooks({ commit }) {
-
 
     return new Promise((resolve, reject) => {
       userApi.userBooks()
@@ -39,6 +37,27 @@ const actions = {
   },
   setShowBook({ commit }, { book, value }) {
     commit(SET_SHOW_BOOK, { book, value });
+  },
+  deleteBook({ commit }, book_id) {
+    return new Promise((resolve, reject) => {
+      userApi.deleteUserBook(book_id)
+        .then(res => {
+          console.log(res);
+        });
+    });
+  },
+  addBook({ commit }, { book_id, completed_readings }) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        userApi.addBookToLibrary({ book_id, completed_readings })
+          .then(res => {
+            resolve();
+          }).catch(err => {
+            reject();
+          })
+      }, 100);
+
+    })
   }
 }
 

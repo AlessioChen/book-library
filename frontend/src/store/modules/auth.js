@@ -67,6 +67,7 @@ const actions = {
           commit(LOGOUT);
           localStorage.removeItem("token");
           localStorage.removeItem("user_id");
+          reject();
 
         })
     });
