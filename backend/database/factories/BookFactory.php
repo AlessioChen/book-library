@@ -15,7 +15,7 @@ class BookFactory extends Factory {
      */
     public function definition() {
         return [
-            'title' => $this->faker->title,
+            'title' => $this->faker->sentence,
             'isbn_code' => $this->faker->isbn13,
             'author' => $this->faker->name,
             'plot' => $this->faker->text

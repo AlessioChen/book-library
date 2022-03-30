@@ -30,7 +30,9 @@ class User extends Authenticatable {
         return $this->belongsToMany(Book::class, 'user_book')
             ->withPivot([
                 'add_date',
-                'completed_readings'
-            ])->orderByPivot('add_date');
+                'completed_readings',
+            ])
+            ->wherePivot('deleted_at', null)
+            ->orderByPivot('add_date');
     }
 }
