@@ -37,6 +37,7 @@ const actions = {
             let access_token = data.data.access_token;
             let user = data.data.user;
             localStorage.setItem('token', access_token);
+            localStorage.setItem('user_id', user.id);
             commit("LOGIN_SUCCESS", { token: access_token, user: user });
 
             resolve();
@@ -44,6 +45,7 @@ const actions = {
           .catch(err => {
             commit("AUTH_ERROR");
             localStorage.removeItem("token");
+            localStorage.removeItem("user_id");
             reject();
 
           })
@@ -59,7 +61,13 @@ const actions = {
         .then((response) => {
           commit(LOGOUT);
           localStorage.removeItem("token");
+          localStorage.removeItem("user_id");
           resolve();
+        }).catch(err => {
+          commit(LOGOUT);
+          localStorage.removeItem("token");
+          localStorage.removeItem("user_id");
+
         })
     });
 
