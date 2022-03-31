@@ -34,10 +34,22 @@ class UserBookController extends Controller {
 
     public function store(UserBookStoreRequest $request, User $user) {
 
-        $user->library()->attach($request->validated('book_id'), [
+        $book_id =  $request->validated('book_id');
+
+        if ($user->books()->where('id', $book_id)->exists()) {
+            $user->books()->detach($book_id);
+        }
+
+        $user->library()->attach($book_id, [
             'add_date' => Carbon::now(),
             'completed_readings' => $request->validated('completed_readings'),
+            'deleted_at' => null
         ]);
+
+
+
+
+
 
         return response()->json(["message" => 'Book added to your library!']);
     }

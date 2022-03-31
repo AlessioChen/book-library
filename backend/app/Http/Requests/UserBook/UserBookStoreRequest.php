@@ -18,9 +18,6 @@ class UserBookStoreRequest extends FormRequest {
             'book_id' => [
                 'required',
                 'integer',
-                Rule::unique('user_book', 'book_id')->where(function ($query) {
-                    return $query->where('user_id', Auth::user()->id);
-                }),
             ]
         ];
     }
