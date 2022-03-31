@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder {
      */
     public function run() {
 
-        $user = User::create([
+        User::create([
             'name' => 'alessio',
             'email' => 'alessio@alessio.it',
             'password' => Hash::make('password')
@@ -28,12 +28,10 @@ class DatabaseSeeder extends Seeder {
 
         $users = User::all();
         foreach ($users as $user) {
-            for ($i = 0; $i < rand(2, 5); $i++) {
-                $user->library()->attach(rand(1, Book::count()), [
-                    'add_date' => Carbon::now()->subDays(rand(1, 10)),
-                    'completed_readings' => rand(1, 5)
-                ]);
-            }
+            $user->library()->attach(rand(1, Book::count()), [
+                'add_date' => Carbon::now()->subDays(rand(1, 10)),
+                'completed_readings' => rand(1, 5)
+            ]);
         }
     }
 }

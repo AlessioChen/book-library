@@ -6,6 +6,7 @@ use App\Http\Requests\UserBook\UserBookDestroyRequest;
 use App\Http\Requests\UserBook\UserBookIndexRequest;
 use App\Http\Requests\UserBook\UserBookStoreRequest;
 use App\Http\Requests\UserBook\UserBookUpdatetRequest;
+use App\Http\Requests\UserBookNotInRequest;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Models\User;
@@ -47,8 +48,21 @@ class UserBookController extends Controller {
             return response()->json(["error" => 'Book Not present in library'], 404);
         }
 
-        $user->library()->detach($book);
+        $user->library()->updateExistingPivot($book->id, ['deleted_at' => Carbon::now()]);
 
         return response()->json(["message" => "Book delete from library"]);
+    }
+
+    public function booskNotInLibrary(UserBookNotInRequest $request, User $user) {
+
+        $books = Book::all()
+            ->except($user
+                ->library()
+                ->get()
+                ->pluck('id')
+                ->toArray());
+
+
+        return BookResource::collection($books);
     }
 }

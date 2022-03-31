@@ -29,6 +29,7 @@ Route::group([
     ], function () {
 
         Route::get('logout', [AuthController::class, 'logout']);
+        Route::get('users/{user}/books/notIn', [UserBookController::class, 'booskNotInLibrary']);
         Route::apiResources([
             'books' => BookController::class,
             'users.books' => UserBookController::class

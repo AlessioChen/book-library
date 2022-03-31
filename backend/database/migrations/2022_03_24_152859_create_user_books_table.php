@@ -14,21 +14,20 @@ return new class extends Migration {
      */
     public function up() {
         Schema::create('user_book', function (Blueprint $table) {
-            $table->id();
+
 
             $table->foreignIdFor(User::class)
-                ->nullable()
-                ->constrained()
-                ->nullOnDelete();
+                ->constrained();
 
             $table->foreignIdFor(Book::class)
-                ->nullable()
-                ->constrained()
-                ->nullOnDelete();
+                ->constrained();
+
+            $table->primary(['user_id', 'book_id']);
 
             $table->date('add_date');
             $table->unsignedInteger('completed_readings');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
