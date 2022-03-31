@@ -49,13 +49,14 @@ const actions = {
   addBook({ commit }, { book_id, completed_readings }) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
+        console.log(book_id)
         userApi.addBookToLibrary({ book_id, completed_readings })
           .then(res => {
             resolve();
           }).catch(err => {
-            reject();
+            console.log(err)
           })
-      }, 100);
+      }, 1000);
 
     })
   }
