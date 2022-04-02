@@ -2,15 +2,16 @@
 
 ### Features
 
-- Login.
-- Logout.
+- Registration
+- Login
+- Logout
 - Booklist
 - Users can add ,show ,delete book from their library. 
 
 
 ### Build With
 - PHP using Laravel.
-- 
+
 ### Getting started
 Make sure to have docker installed on the computer.
 1. Clone the repo
@@ -29,15 +30,12 @@ https://github.com/AlessioChen/book-library.git
 ```
 
 ### Usage 
-- Go to the home page 
-```
-http://localhost/81
-```
+- in the api.php you can find the definition of all routes, and with command: ``` sail artisan route:list  ``` you can see all of them. 
 
-- You can use 'alessio@alessio.it' as a user and 'password' as the password to log in.
 
 ### Acknowledgements
 
 - [Laravel](https://laravel.com/)
+- [Laravel Sanctum](https://laravel.com/docs/9.x/sanctum)
 - [Docker](https://www.docker.com/)
 
