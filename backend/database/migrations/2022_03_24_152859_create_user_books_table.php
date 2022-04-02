@@ -24,8 +24,8 @@ return new class extends Migration {
 
             $table->primary(['user_id', 'book_id']);
 
-            $table->date('add_date');
-            $table->unsignedInteger('completed_readings');
+            $table->date('add_date')->nullable();
+            $table->unsignedInteger('completed_readings')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
