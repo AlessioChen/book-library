@@ -25,7 +25,20 @@ const getters = {
 
 // actions
 const actions = {
-
+  register: ({ commit }, data) => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        userApi.register(data)
+          .then(({ data }) => {
+            resolve();
+          })
+          .catch(err => {
+            console.log(err)
+            reject();
+          })
+      }, 100);
+    });
+  },
   login: ({ commit }, creds) => {
 
     commit(LOGIN);

@@ -4,7 +4,7 @@
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
       <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
         <div>
-          <router-link class="mr-5 hover:text-gray-900" to="/">Home</router-link>
+          <router-link :to="{name: 'Home'}" class="mr-5 hover:text-gray-900">Home</router-link>
           <a v-if="isLoggedIn" @click="logout" href="#" class="pl-3 inline-block no-underline hover:text-black">
             Logout
           </a>
@@ -24,7 +24,7 @@ const router = useRouter();
 
 const logout = () => {
   store.dispatch("auth/logout").then(() => {
-    router.push({name : 'Login'});
+    router.push({ name: "Login" });
   });
 };
 

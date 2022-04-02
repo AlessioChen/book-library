@@ -18,6 +18,14 @@ export default {
       }
     });
   },
+  register(data) {
+    return http.post(db_url + '/register', {
+      email: data.email,
+      name: data.name,
+      password: data.password,
+      password_confirm: data.passwordConfirm
+    });
+  },
 
   userBooks() {
     return http.get(db_url + `/users/${localStorage.getItem('user_id')}/books`, {
